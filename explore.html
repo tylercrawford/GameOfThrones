@@ -6,10 +6,11 @@
     $(document).ready(function(){
        $("#kingdoms").click(function() {
           $.ajax({
-             type: "POST",
+             type: "GET",
              url: "explore1.php",
+             dataType: "html",
              success: function(data) {
-                $("#result").text(data);
+                $("#result").html(data);
                 }
              });
           });
@@ -23,7 +24,8 @@
   <h3>Explore</h3>
   <br>
   <button id="kingdoms">Kingdoms</button>
-  <p id="result">No results yet.</p>
+  <br><br>
+  <div id="result">No results yet.</div>
 </body>
 
 </html>
