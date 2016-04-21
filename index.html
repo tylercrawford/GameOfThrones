@@ -1,32 +1,52 @@
-<html>
 
-<?php
-$con = new mysqli('stardock.cs.virginia.edu', 'cs4750sam4ku', 'scott', 'cs4750sam4ku');
-if (mysqli_connect_errno())
-{
-	echo "Failed to connect to MYSQL: " . mysqli_connect_error();
-}
-echo "hello world";
-$sql = "SELECT * FROM Person";
-// // $sql = "SELECT Password FROM Admins";
-// $result = $con->query($sql);
-// echo $result;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Baseball Data</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Explore Data
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/explore/leaders.php">Leaders</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/explore/top_performers.php">Top Performers</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/explore/results.php">Results</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/explore/rosters.php">Rosters</a></li>
+        </ul>
+      </li>
+      <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
+      <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+    </ul>
+  </div>
+</nav>
 
-$result = mysqli_query($con, $sql);
+<div class="container">
+  <div class="jumbotron">
+    <h1>MLB Playoff Hub</h1>      
+    <p>A resource to research players, evaluate playoff statistics, and learn about the teams in the 2015 Major League Baseball playoffs. Leverages a statistical database drawn from data from Baseball Reference and ESPN Stats and Info.</p>
+  </div>
+  <p>Created for CS4750 at the University of Virginia.</p>      
+  <p>Written by Conor McLaughlin, Michael Sciarrino, and Rohan Deshpande.</p>      
+</div>
+  
+<div class="container"> 
+	<br>
+	<p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>   
+</div>
 
-while($row = mysqli_fetch_array($result)) {
-    echo $row['p_name'];
-    echo " " . $row['birthyear'];
-    echo "<br>";
-}
-echo "bye";
-
-// // check to see if the password matches the password stored in the database
-// // Both passwords are hashed
-// foreach ($result as $user):
-// 	$pass = $user["Password"];
-// 	echo $pass;
-// mysqli_close($con);
-?>
+</body>
 </html>
