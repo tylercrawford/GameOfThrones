@@ -8,16 +8,23 @@
     </head>
 
     <body>
-    <?php
-        $sql = "SELECT * FROM Person";
+        <?php
+            $sql = "SELECT * FROM Person";
 
-        $result = mysqli_query($con, $sql);
-
-        while($row = mysqli_fetch_array($result)) {
-            echo $row['p_name'];
-            echo " " . $row['birthyear'];
-            echo "<br>";
-        }
-    ?>
+            $result = mysqli_query($con, $sql);
+        ?>
+        <h3>SEARCH FORM</h3>
+        <form name = "searchform" action = "search.php" method = "POST">
+            <!-- Username: <br/><input type = "text" name = "username" maxlength = "50" required><br />  -->
+            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
+            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
+        </form>
+        <?php
+            while($row = mysqli_fetch_array($result)) {
+                echo $row['p_name'];
+                echo " " . $row['birthyear'];
+                echo "<br>";
+            }
+        ?>
     </body>
 </html>
