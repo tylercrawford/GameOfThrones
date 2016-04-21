@@ -1,4 +1,7 @@
 <html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
 
 <?php
 $con = new mysqli('stardock.cs.virginia.edu', 'cs4750sam4ku', 'scott', 'cs4750sam4ku');
