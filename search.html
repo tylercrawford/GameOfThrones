@@ -9,19 +9,15 @@
           type: "POST",
           url: "autocomplete.php",
           data:'keyword='+$(this).val(),
-          beforeSend: function(){
-             $("#search-box").css("background","#FFF")
-          },
           success: function(data){
-             $("#suggesstion-box").show();
-             $("#suggesstion-box").html(data);
-             $("#search-box").css("background","#FFF");
+             $("#suggestion-box").show();
+             $("#suggestion-box").html(data);
           }
           });
        });
    });
-//To select country name
-function selectCountry(val) {
+//To select Person name
+function selectPerson(val) {
 $("#search-box").val(val);
 $("#suggesstion-box").hide();
 }
@@ -37,7 +33,8 @@ $("#suggesstion-box").hide();
   <h3>SEARCH FORM</h3>
   <div class="frmsearch">
      <input type="text" placeholder="Search..." id="search-box">
-     <div id = "suggestion-box"></div>
+     <div id ="suggestion-box">
+</div>
   </div>
 </body>
 
