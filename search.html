@@ -1,0 +1,79 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+       $("#search-box").keyup(function(){
+          $.ajax({
+          type: "POST",
+          url: "autocomplete.php",
+          data:'keyword='+$(this).val(),
+          success: function(data){
+             $("#suggestion-box").show();
+             $("#suggestion-box").html(data);
+          }
+          });
+       });
+   });
+
+    $(document).ready(function(){
+       $("#submit").onClick(function(){
+          $.ajx({
+          type:"POST",
+          url: "search.php",
+          data: {person='+$(#search-box).val(), season = $(#season).val(), question = $(#question).val()}
+          success: function(data) {
+             $("#results").html(data);
+          }
+          });
+       });
+    });
+//To select Person name
+function selectPerson(val) {
+$("#search-box").val(val);
+$("#suggestion-box").hide();
+}
+    
+
+</script>
+
+
+</head>
+
+<body>
+
+  <h3>SEARCH FORM</h3>
+
+  <div class="frmsearch">
+
+     <input type="text" placeholder="Search..." id="search-box">
+     <div id ="suggestion-box"></div>
+
+     <div id="question">Question?
+       <select name="Question" id="question">
+	 <option value="MarriedTo">Spouse</option>
+	 <option value="Killed">Victims</option>
+	 <option value="House">Loyalty</option>
+       </select>
+     </div>
+     
+     <div id="season">Season?
+       <select name="season" id="season">
+	 <option value="1">1</option>
+	 <option value="2">2</option>
+	 <option value="3">3</option>
+	 <option value="4">4</option>
+	 <option value="5">5</option>
+       </select>
+     </div>
+   
+     <div>
+       <button type="button" id="submit">Search</button>
+     </div>
+  </div>
+</body>
+
+
+</html>

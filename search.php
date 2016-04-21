@@ -1,40 +1,40 @@
 <?php
-<<<<<<< HEAD
-$con = new mysqli('stardock.cs.virginia.edu', 'cs4750sam4ku', 'scott', 'cs4750sam4ku');
-if (mysqli_connect_errno())
-{
-	echo "Failed to connect to MYSQL: " . mysqli_connect_error();
-}
-echo "hello world <br>";
-echo "hello world <br>";
-// // $sql = "SELECT Password FROM Admins";
-// $result = $con->query($sql);
-// echo $result;
-$kingdom = $_POST["text"];
-$word = $_POST["drop"];
-echo $word;
-$sql = "SELECT * FROM House WHERE kingdom='".$kingdom."'";
-=======
     require_once("config.php");
 ?>
+<h3>FORM</h3>
+<form name = "searchform" action = "search.php" method = "POST">
+        <select name="drop">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
+    <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
+</form>
 
 <html>
     <head>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
->>>>>>> b8305ac3337660db834bb59bf34f29d2c2f95300
 
     <body>
         <?php
-            $kingdom = $_POST["text"];
-            $sql = "SELECT * FROM House WHERE kingdom='".$kingdom."'";
-
+            $sql = "SELECT * FROM Person";
 
             $result = mysqli_query($con, $sql);
-
+        ?>
+        <h3>SEARCH FORM</h3>
+        <form name = "searchform" action = "search.php" method = "POST">
+            <!-- Username: <br/><input type = "text" name = "username" maxlength = "50" required><br />  -->
+            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
+            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
+        </form>
+        <?php
             while($row = mysqli_fetch_array($result)) {
-                echo "<a href='view_house.php?house=" , $row['h_name'] , "'>".$row['h_name']."</a>";
-                // echo $row['h_name'];
-                echo " " . $row['castle'];
+                echo $row['p_name'];
+                echo " " . $row['birthyear'];
                 echo "<br>";
             }
         ?>
