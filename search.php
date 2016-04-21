@@ -10,7 +10,7 @@ echo "hello world <br>";
 // // $sql = "SELECT Password FROM Admins";
 // $result = $con->query($sql);
 // echo $result;
-$kingdom = $_GET["kingdom"];
+$kingdom = $_POST["text"];
 $sql = "SELECT * FROM House WHERE kingdom='".$kingdom."'";
 
 
