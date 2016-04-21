@@ -11,7 +11,7 @@
         <?php
             $house = $_GET["house"];
             $sql = "SELECT * FROM Person WHERE house='".$house."'";
-
+            echo $sql;
             $result = mysqli_query($con, $sql);
 
             while($row = mysqli_fetch_array($result)) {
