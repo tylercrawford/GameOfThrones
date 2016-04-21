@@ -1,17 +1,28 @@
+<?php
+    require_once("config.php");
+?>
+
 <html>
-<!DOCTYPE html>
-<html>
-<body>
+    <head>
+    </head>
 
-<p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
+    <body>
 
-<button onclick="myFunction('hello')">Click me</button>
+        <?php
+            // header("Content-type: image/jpeg");
 
-<script>
-function myFunction(id) {
-  alert(id);
-}
-</script>
+            $sql = "SELECT image FROM Picture WHERE name='North";
+            echo $sql;
+            $con = new mysqli('stardock.cs.virginia.edu', 'cs4750sam4ku', 'scott', 'cs4750sam4ku');
 
-</body>
+            $retrieve = $con->get_row("SELECT image FROM Picture WHERE name = 'North");
+            $result = mysqli_query($con, $sql);
+            $image = imagejpeg(imagecreatefromstring(base64_decode($retrieve->image)));
+
+        ?>
+    </body>
 </html>
+
+<?php
+    mysqli_close($con);
+?>

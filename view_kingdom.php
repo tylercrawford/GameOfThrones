@@ -7,17 +7,18 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <script type="text/javascript">
-      function myFunction(id) {
-        var doc_id = id.replace(" ", "_");
-        $("#images > *").hide();
-        $("#"+doc_id).show();
-      }
+      
       function myFunction2(id) {
         var doc_id = id.replace(" ", "_");
-        document.location = "view_kingdom.php?kingdom="+id;
+        document.location = "view_house.php?house="+id;
       }
-    $("#images > *").hide();
-    $("#The Vale").show();
+        $(document).ready(function(){
+            $("#images > *").hide();
+            var image = "<?php echo $_GET['kingdom']; ?>";
+            var doc_id = image.replace(" ", "_");
+
+            $("#"+doc_id).show();
+       });
 
     </script>
   </head>
@@ -29,6 +30,15 @@
   <body>
     <center>
       <h3>Houses of the <?php echo $_GET['kingdom']; ?></h3>
+            <?php
+                $kingdom = $_GET["kingdom"];
+                $sql = "SELECT * FROM Kingdom WHERE k_name='".$kingdom."'";
+                $result = mysqli_query($con, $sql);
+                while($row = mysqli_fetch_array($result)) {
+                    echo "<h4>Leige Lord is House " . $row["leige_lord"] . "</h4>";
+                }
+            ?>
+
       <table> 
         <tr>
           <td>
@@ -43,7 +53,7 @@
                 while($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                  <td width='400' height='70' onMouseOver="myFunction('<?php echo $row['h_name']; ?>')" onClick="myFunction2('<?php echo $row['h_name']; ?>')"><?php echo $row['h_name']; ?></td>
+                  <td width='400' height='70' onClick="myFunction2('<?php echo $row['h_name']; ?>')"><?php echo "House " . $row['h_name']; ?></td>
                 </tr>
                 <?php
               } 
@@ -53,28 +63,28 @@
           <td>
             <div id="images">
               <div id="westeros">
-                <img src="westeros.png" width="400">
+                <img src="images/westeros.png" width="400">
               </div>
               <div id="The_North" hidden="true">
-                <img src="The North.png" width="400" >
+                <img src="images/The North.png" width="400" >
               </div>
               <div id="The_Reach" hidden="True">
-                <img src="The Reach.png" width="400" >
+                <img src="images/The Reach.png" width="400" >
               </div>
               <div id="Dorne" hidden="True">
-                <img src="Dorne.png" width="400" >
+                <img src="images/Dorne.png" width="400" >
               </div>
               <div id="The_Vale" hidden="true">
-                <img src="The Vale.png" width="400" >
+                <img src="images/The Vale.png" width="400" >
               </div>
               <div id="The_Riverlands" hidden="true">
-                <img src="The Riverlands.png" width="400" >
+                <img src="images/The Riverlands.png" width="400" >
               </div>
               <div id="The_Stormlands" hidden="true">
-                <img src="The Stormlands.png" width="400" >
+                <img src="images/The Stormlands.png" width="400" >
               </div>
               <div id="The_Westerlands" hidden="true">
-                <img src="The Westerlands.png" width="400" >
+                <img src="images/The Westerlands.png" width="400" >
               </div>
 
             </div>
