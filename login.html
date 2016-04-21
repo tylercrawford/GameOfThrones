@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<h3>Log in</h3>
+	<h6>Log in below</h6>
+  <form name = "loginform" action = "login.php" method = "POST">
+      Name: <br/><input type = "text" name = "username" maxlength = "50" required><br />
+      Password: <br/><input type = "password" name = "password" maxlength = "50" required><br /> <br/>
+      <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
+    </form>
+    <br/>
+    <input type = "button" class="btn btn-default" name = "forgot" value = "Forgot Password" onclick = "forgotPassword2()">
+    <input type = "button" class="btn btn-default" name = "newUser" value = "Register User" onclick = "newUser()">
+</body>
+
+</html>
