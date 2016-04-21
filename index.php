@@ -1,21 +1,7 @@
 <?php
     require_once("config.php");
+    session_start();
 ?>
-<h3>FORM</h3>
-<form name = "searchform" action = "search.php" method = "POST">
-	<select name="drop">
-	  <option value="volvo">Volvo</option>
-	  <option value="saab">Saab</option>
-	  <option value="mercedes">Mercedes</option>
-	  <option value="audi">Audi</option>
-	</select>    
-	Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
-    <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
-</form>
-// $sql = "SELECT * FROM Person";
-// // // $sql = "SELECT Password FROM Admins";
-// // $result = $con->query($sql);
-// // echo $result;
 
 <html>
     <head>
@@ -25,12 +11,31 @@
     </head>
 
     <body>
+        <a href="login.html">Login</a>
+        <?php
+            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == TRUE) {
+                echo(" | "); 
+                echo("<a href='edit.php'>Edit</a>");
+                echo(" | ");
+                echo("<a href='logout.php'>Logout</a>");
+            }
+        ?>
+        <h3>FORM</h3>
+        <form name = "searchform" action = "search.php" method = "POST">
+            <select name="drop">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+            </select>    
+            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
+            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
+        </form>
         <?php
             $sql = "SELECT * FROM Person";
 
             $result = mysqli_query($con, $sql);
         ?>
-        <a href="login.html">Login</a>
         <h3>SEARCH FORM</h3>
         <form name = "searchform" action = "search.php" method = "POST">
             <!-- Username: <br/><input type = "text" name = "username" maxlength = "50" required><br />  -->
