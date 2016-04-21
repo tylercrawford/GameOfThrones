@@ -7,10 +7,13 @@ if (mysqli_connect_errno())
 	echo "Failed to connect to MYSQL: " . mysqli_connect_error();
 }
 echo "hello world <br>";
+echo "hello world <br>";
 // // $sql = "SELECT Password FROM Admins";
 // $result = $con->query($sql);
 // echo $result;
 $kingdom = $_POST["text"];
+$word = $_POST["drop"];
+echo $word;
 $sql = "SELECT * FROM House WHERE kingdom='".$kingdom."'";
 
 
