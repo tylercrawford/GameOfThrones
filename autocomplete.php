@@ -5,11 +5,11 @@ $query ="SELECT * FROM Person WHERE p_name like '" . $_POST["keyword"] . "%' ORD
 $result = mysqli_query($con, $query);
 if(!empty($result)) {
 ?>
-<ul id="name-list">
+<ul id="name-list" class="list-group">
 <?php
 foreach($result as $name) {
 ?>
-<li onClick="selectPerson('<?php echo $name["p_name"]; ?>');"><?php echo $name["p_name"]; ?></li>
+<li class="list-group-item" onClick="selectPerson('<?php echo $name["p_name"]; ?>');"><?php echo $name["p_name"]; ?></li>
 <?php } ?>
 </ul>
 <?php } } ?>
