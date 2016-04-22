@@ -9,11 +9,11 @@
     <script type="text/javascript">
       
       function myFunction2(id) {
-            alert(id);
             $("#lords > *").hide();
             var season = "season_"+id;
 
             $("#"+season).show();
+            $("#season").text('Season ' + id);
       }
 
     </script>
@@ -23,8 +23,31 @@
     require_once("config.php");
   ?>
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
+            </a>
+            <ul class="dropdown-menu">
+              <center>
+              <li><p onClick="myFunction2('1')">Season 1</p></li>
+              <li><p onClick="myFunction2('2')">Season 2</p></li>
+              <li><p onClick="myFunction2('3')">Season 3</p></li>
+              <li><p onClick="myFunction2('4')">Season 4</p></li>
+              <li><p onClick="myFunction2('5')">Season 5</p></li>
+            </ul>
+          </li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+        </ul>
+      </div>
+    </nav>
     <center>
-    <button onClick="myFunction2('4')">Test</button>
 
       <h3>House <?php echo $_GET['house']; ?></h3>
         <div id="lords">
