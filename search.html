@@ -17,13 +17,13 @@
           });
        });
    });
-
+    
     $(document).ready(function(){
-       $("#submit").onClick(function(){
-          $.ajx({
+       $("#submit").on('click', function(){
+          $.ajax({
           type:"POST",
           url: "search.php",
-          data: {person='+$(#search-box).val(), season = $(#season).val(), question = $(#question).val()}
+          data: {person : $("#search-box").val(), season : $("#season").val(), question : $("#question").val()},
           success: function(data) {
              $("#results").html(data);
           }
@@ -54,7 +54,7 @@ $("#suggestion-box").hide();
      <div id="question">Question?
        <select name="Question" id="question">
 	 <option value="MarriedTo">Spouse</option>
-	 <option value="Killed">Victims</option>
+	 <option value="Death">Victims</option>
 	 <option value="House">Loyalty</option>
        </select>
      </div>
