@@ -66,7 +66,7 @@ $("#suggestion-box").hide();
       <div class="container">
 
 	<h1>Search for a  Character</h1>
-	<br><center>
+	<br><br><center>
 	  <div class="col-sm-4 col-centered">
 	    <label for="search-box"></label>
 	       <input type="text" class="form-control" id="search-box" type="search">

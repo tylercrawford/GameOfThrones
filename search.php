@@ -11,32 +11,44 @@ $loyal = $_POST["loyal"];
 if($marriage === "true") {
 	     $query = "SELECT * FROM MarriedTo WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
+	     echo "<strong>Spouse: </strong>";
+	     if(!mysqli_num_rows($result)){
+	     echo "None<br>";
+	     }
 	     while( $row = $result->fetch_assoc()) {
 	     	    if ($person === $row['husband']) {
-       	     	       echo $person . " is married to " . $row['wife'];
+       	     	       echo $row['wife'];
 		       echo "<br>";
 		       }
 		    else {
-		    	 echo $person . " is married to " . $row['husband'];
-       	     	    	 echo "<br><br>";
+		    	 echo $row['husband'];
+       	     	    	 echo "<br>";
 		    	 }
 		    }
 	     }
 
 if($death === "true") {
-	     $query ="SELECT * FROM Death WHERE name = '" . $person . "';";
+	     $query ="SELECT * FROM Death WHERE killer = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
+	     echo"<strong>Victims: </strong>";
+	     if(!mysqli_num_rows($result)){
+	     echo "None<br>";
+	     }
 	     while( $row = $result->fetch_assoc()) {
-	     	    echo $person . " was killed by " . $row['killer'];
-		    echo "<br><br>";
+	     	    echo $row['name'];
+		    echo "<br>";
 		    }
 	     }
 
 if($loyal === "true") {
 	     $query = "SELECT * FROM LoyalTo WHERE p_name = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
+	     echo "<strong>Loyalty: </strong>";
+	     if(!mysqli_num_rows($result)){
+	     echo "None";
+	     }
 	     while( $row = $result->fetch_assoc()) {
-	     	    echo $person . " is loyal to House " . $row['house'];
+	     	    echo $row['house'];
 	     	    echo "<br><br>";
 	     	    }
              }

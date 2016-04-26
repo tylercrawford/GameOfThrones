@@ -17,25 +17,31 @@
             <table class="table">
                 <?php
                     $table = $_GET['table'];
-                    $sql = "DESCRIBE " . $table;
-                    $result1 = mysqli_query($con, $sql);
 
-                    echo "<tr>";
-                    while ($row = mysqli_fetch_array($result1)) {
-                        echo "<th>" . $row[0] . "</th>";
-                    }
-                    echo "</tr>";
-
-                    $sql = "SELECT * FROM " . $table;
-                    $result2 = mysqli_query($con, $sql);
-
-                    while ($row = mysqli_fetch_array($result2)) {
+                    if ($table == "House") {
                         echo "<tr>";
-                        for ($i=0; $i < mysqli_num_rows($result1); $i++) {
-                            echo "<td>" . $row[$i] . "</td>";
+                        echo "<th>House Name</th>";
+                        echo "<th>Castle</th>";
+                        echo "<th>Kingdom</th>";
+                        echo "<th>Words</th>";
+                        echo "<th></th><th></th>";
+                        echo "</tr>";
+
+                        $sql = "SELECT * FROM House";
+                        $result = mysqli_query($con, $sql);
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr>";
+                            echo "<td>" . $row[0] . "</td>";
+                            echo "<td>" . $row[1] . "</td>";
+                            echo "<td>" . $row[2] . "</td>";
+                            echo "<td>" . $row[3] . "</td>";
+                            echo "<td><a href='edit_row.php?table=House&house=" . $row[0] . "'>Edit</a></td>";
+                            echo "<td><a href='delete_row.php?table=House&house=" . $row[0] . "'>Delete</a></td>";
+                            echo "</tr>";
                         }
-                        echo "<tr>";
                     }
+
+                    
                 ?>
             </table>
         </form>
