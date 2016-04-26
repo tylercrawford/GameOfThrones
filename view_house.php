@@ -73,6 +73,7 @@ endif;
           <li class="active"><a href="./index.php">Home</a></li>
           <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
+          <li><a href="./statistics.php">Statistics</a></li>
           <li style="float:right">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
