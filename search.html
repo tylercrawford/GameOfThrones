@@ -17,13 +17,13 @@
           });
        });
    });
-
+    
     $(document).ready(function(){
-       $("#submit").onClick(function(){
-          $.ajx({
+       $("#submit").on('click', function(){
+          $.ajax({
           type:"POST",
           url: "search.php",
-          data: {person='+$(#search-box).val(), season = $(#season).val(), question = $(#question).val()}
+          data: {person : $("#search-box").val(), season : $("#season").val(), question : $("#question").val()},
           success: function(data) {
              $("#results").html(data);
           }
@@ -51,15 +51,15 @@ $("#suggestion-box").hide();
      <input type="text" placeholder="Search..." id="search-box">
      <div id ="suggestion-box"></div>
 
-     <div id="question">Question?
+     <div id="question-box"> Question?
        <select name="Question" id="question">
 	 <option value="MarriedTo">Spouse</option>
-	 <option value="Killed">Victims</option>
-	 <option value="House">Loyalty</option>
+	 <option value="Death">Victims</option>
+	 <option value="LoyalTo">Loyalty</option>
        </select>
      </div>
      
-     <div id="season">Season?
+     <div id="season-box">Season?
        <select name="season" id="season">
 	 <option value="1">1</option>
 	 <option value="2">2</option>
@@ -73,6 +73,10 @@ $("#suggestion-box").hide();
        <button type="button" id="submit">Search</button>
      </div>
   </div>
+
+  <div id="results">
+    <p>Results</p>
+  </div
 </body>
 
 
