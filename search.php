@@ -2,27 +2,38 @@
     require_once("config.php");
 ?>
 
-<?php 
-
-
-    foreach ($_POST as $key => $value) {
-        echo "<tr>";
-        echo "<td>";
-        echo $key;
-        echo "</td>";
-        echo "<td>";
-        echo $value;
-        echo "</td>";
-        echo "</tr>";
-    }
-
-
-?>
-
 <?php
-$query ="SELECT * FROM '" . $_POST["question"] . "'";
-echo $query;
-$result = mysqli_query($con, $query);
+$person = $_POST["person"];
+$question = $_POST["question"];
+
+if($question === "MarriedTo") {
+	     $query = "SELECT * FROM " . $question . " WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+       	     	    echo $row['husband'];
+       	     	    echo "<br><br>";
+		    }
+	     }
+
+if($question === "Death") {
+	     $query ="SELECT * FROM " . $question . " WHERE name = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+	     	    echo $person . " was killed by " . $row['killer'];
+		    echo "<br><br>";
+		    }
+	     }
+
+if($question === "LoyalTo") {
+	     $query = "SELECT * FROM " . $question . " WHERE p_name = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+	     	    echo $person . " is loyal to House " . $row['house'];
+	     	    echo "<br><br>";
+	     	    }
+             }
+
+
 ?>
             
 <?php
