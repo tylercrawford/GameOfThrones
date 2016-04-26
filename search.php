@@ -4,10 +4,12 @@
 
 <?php
 $person = $_POST["person"];
-$question = $_POST["question"];
+$death = $_POST["death"];
+$marriage = $_POST["marriage"];
+$loyal = $_POST["loyal"];
 
-if($question === "MarriedTo") {
-	     $query = "SELECT * FROM " . $question . " WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
+if($marriage === "true") {
+	     $query = "SELECT * FROM MarriedTo WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
 	     while( $row = $result->fetch_assoc()) {
 	     	    if ($person === $row['husband']) {
@@ -21,8 +23,8 @@ if($question === "MarriedTo") {
 		    }
 	     }
 
-if($question === "Death") {
-	     $query ="SELECT * FROM " . $question . " WHERE name = '" . $person . "';";
+if($death === "true") {
+	     $query ="SELECT * FROM Death WHERE name = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
 	     while( $row = $result->fetch_assoc()) {
 	     	    echo $person . " was killed by " . $row['killer'];
@@ -30,8 +32,8 @@ if($question === "Death") {
 		    }
 	     }
 
-if($question === "LoyalTo") {
-	     $query = "SELECT * FROM " . $question . " WHERE p_name = '" . $person . "';";
+if($loyal === "true") {
+	     $query = "SELECT * FROM LoyalTo WHERE p_name = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
 	     while( $row = $result->fetch_assoc()) {
 	     	    echo $person . " is loyal to House " . $row['house'];
