@@ -15,6 +15,10 @@
             $("#"+season).show();
             $("#season").text('Season ' + id);
       }
+      function myFunction(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_person.php?name="+id;
+      }
 
     </script>
   </head>
@@ -118,7 +122,7 @@
                 while($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                  <td width='400' height='40'><?php echo $row['p_name']; ?></td>
+                  <td width='400' height='40' onClick="myFunction('<?php echo $row['p_name']; ?>')"><?php echo $row['p_name']; ?></td>
                 </tr>
                 <?php
               } 
