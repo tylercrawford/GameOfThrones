@@ -26,6 +26,10 @@ endif;
         var doc_id = id.replace(" ", "_");
         document.location = "view_kingdom.php?kingdom="+id;
       }
+      function myFunction3(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_house.php?house=Nights Watch";
+      }
     </script>
     <script type="text/javascript">
       function seasonChange(season) {
@@ -60,9 +64,9 @@ endif;
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+          <li class="active"><a href="./index.php">Home</a></li>
+          <li><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./search.html">Search</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
@@ -85,16 +89,19 @@ endif;
           <td>
             <table class="table table-hover">
             <?php
-              $sql = "SELECT * FROM Kingdom WHERE Kingdom.leige_lord IS NOT Null";
+              $sql = "SELECT * FROM Kingdom WHERE Kingdom.leige_lord IS NOT Null ORDER BY k_name";
               $result = mysqli_query($con, $sql);
               while($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                  <td width='400' height='70' onMouseOver="myFunction('<?php echo $row['k_name']; ?>')" onClick="myFunction2('<?php echo $row['k_name']; ?>')"><?php echo $row['k_name']; ?></td>
+                  <td width='400' height='65' onMouseOver="myFunction('<?php echo $row['k_name']; ?>')" onClick="myFunction2('<?php echo $row['k_name']; ?>')"><?php echo $row['k_name']; ?></td>
                 </tr>
                 <?php
               } 
               ?>
+              <tr>
+                  <td width='400' height='65' onMouseOver="myFunction('westeros')" onClick="myFunction3('Nights Watch')">The Wall</td>
+                </tr>
               </table>
           </td>
           <td>

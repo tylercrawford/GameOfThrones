@@ -28,7 +28,7 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="./index.html">Home</a></li>
-      <li><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
           <li><a href="#">Admin</a></li>
         </ul>

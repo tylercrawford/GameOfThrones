@@ -70,9 +70,9 @@ endif;
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+          <li class="active"><a href="./index.php">Home</a></li>
+          <li><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./search.html">Search</a></li>
           <li style="float:right">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
@@ -89,8 +89,16 @@ endif;
       </div>
     </nav>
     <center>
+      <?php
+        $house = $_GET['house'];
+        if ($house == "Nights Watch") {
+          echo "<h3>The Night's Watch</h3>";
+        }
+        else {
+          echo "<h3>House ".$house."</h3>";
 
-      <h3>House <?php echo $_GET['house']; ?></h3>
+        }
+      ?>
         <div id="lords">
             <div id="season_1">
                 <?php
