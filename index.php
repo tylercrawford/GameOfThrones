@@ -11,13 +11,17 @@
     </head>
 
     <body>
-        <a href="login.html">Login</a>
+        <a href="login.html" id="login">Login</a>
         <?php
             if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == TRUE) {
-                echo(" | "); 
                 echo("<a href='edit.php'>Edit</a>");
                 echo(" | ");
                 echo("<a href='logout.php'>Logout</a>");
+                ?>
+                <script>
+                    $("#login").hide();
+                </script>
+                <?php
             }
         ?>
         <h3>FORM</h3>
