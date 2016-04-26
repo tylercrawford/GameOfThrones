@@ -10,8 +10,14 @@ if($question === "MarriedTo") {
 	     $query = "SELECT * FROM " . $question . " WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
 	     while( $row = $result->fetch_assoc()) {
-       	     	    echo $row['husband'];
-       	     	    echo "<br><br>";
+	     	    if ($person === $row['husband']) {
+       	     	       echo $person . " is married to " . $row['wife'];
+		       echo "<br>";
+		       }
+		    else {
+		    	 echo $person . " is married to " . $row['husband'];
+       	     	    	 echo "<br><br>";
+		    	 }
 		    }
 	     }
 
