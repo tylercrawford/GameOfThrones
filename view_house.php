@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION["season"])):
+  $season_number = $_SESSION["season"];
+  //echo " is logged in the session";
+else:
+  // No user is logged in, thus redirect to home.php
+  $_SESSION["season"] = 1;
+endif;  
+?>
 
 <html>
   <head>
@@ -8,23 +18,77 @@
 
     <script type="text/javascript">
       
-      function myFunction2(id) {
-            alert(id);
-            $("#lords > *").hide();
-            var season = "season_"+id;
+      // function myFunction2(id) {
+      //       $("#lords > *").hide();
+      //       var season = "season_"+id;
 
-            $("#"+season).show();
+      //       $("#"+season).show();
+      //       $("#season").text('Season ' + id);
+      // }
+      function myFunction(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_person.php?name="+id;
       }
 
     </script>
+    <script type="text/javascript">
+      function seasonChange(season) {
+        var season_val = season;
+        // alert(season_val);
+        $.ajax({
+          type:"POST",
+          url: "season.php",
+          data: {season : season_val},
+            success: function(data) {
+              // alert(data);
+            }
+          });
+        $("#season").text('Season ' + season);
+        $("#lords > *").hide();
+        var season = "season_"+season_val;
+
+        $("#"+season).show();
+      }
+      $(document).ready(function(){
+        $("#season").text('Season ' + <?php echo $season_number; ?>);
+        $("#lords > *").hide();
+        var season = "season_"+<?php echo $season_number; ?>;
+
+        $("#"+season).show();
+      });
+    </script>
+
   </head>
 
   <?php
     require_once("config.php");
   ?>
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+          <li style="float:right">
+            <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
+            </a>
+            <ul class="dropdown-menu">
+              <center>
+              <li><p onClick="seasonChange('1')">Season 1</p></li>
+              <li><p onClick="seasonChange('2')">Season 2</p></li>
+              <li><p onClick="seasonChange('3')">Season 3</p></li>
+              <li><p onClick="seasonChange('4')">Season 4</p></li>
+              <li><p onClick="seasonChange('5')">Season 5</p></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <center>
-    <button onClick="myFunction2('4')">Test</button>
 
       <h3>House <?php echo $_GET['house']; ?></h3>
         <div id="lords">
@@ -95,7 +159,7 @@
                 while($row = mysqli_fetch_array($result)) {
                 ?>
                 <tr>
-                  <td width='400' height='40'><?php echo $row['p_name']; ?></td>
+                  <td width='400' height='40' onClick="myFunction('<?php echo $row['p_name']; ?>')"><?php echo $row['p_name']; ?></td>
                 </tr>
                 <?php
               } 

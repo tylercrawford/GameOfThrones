@@ -1,46 +1,49 @@
 <?php
     require_once("config.php");
 ?>
-<h3>FORM</h3>
-<form name = "searchform" action = "search.php" method = "POST">
-        <select name="drop">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-        Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
-    <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
-</form>
 
-<html>
-    <head>
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    </head>
+<?php
+$person = $_POST["person"];
+$death = $_POST["death"];
+$marriage = $_POST["marriage"];
+$loyal = $_POST["loyal"];
 
-    <body>
-        <?php
-            $sql = "SELECT * FROM Person";
+if($marriage === "true") {
+	     $query = "SELECT * FROM MarriedTo WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+	     	    if ($person === $row['husband']) {
+       	     	       echo $person . " is married to " . $row['wife'];
+		       echo "<br>";
+		       }
+		    else {
+		    	 echo $person . " is married to " . $row['husband'];
+       	     	    	 echo "<br><br>";
+		    	 }
+		    }
+	     }
 
-            $result = mysqli_query($con, $sql);
-        ?>
-        <h3>SEARCH FORM</h3>
-        <form name = "searchform" action = "search.php" method = "POST">
-            <!-- Username: <br/><input type = "text" name = "username" maxlength = "50" required><br />  -->
-            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
-            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
-        </form>
-        <?php
-            while($row = mysqli_fetch_array($result)) {
-                echo $row['p_name'];
-                echo " " . $row['birthyear'];
-                echo "<br>";
-            }
-        ?>
-    </body>
-</html>
+if($death === "true") {
+	     $query ="SELECT * FROM Death WHERE name = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+	     	    echo $person . " was killed by " . $row['killer'];
+		    echo "<br><br>";
+		    }
+	     }
 
+if($loyal === "true") {
+	     $query = "SELECT * FROM LoyalTo WHERE p_name = '" . $person . "';";
+	     $result = mysqli_query($con, $query);
+	     while( $row = $result->fetch_assoc()) {
+	     	    echo $person . " is loyal to House " . $row['house'];
+	     	    echo "<br><br>";
+	     	    }
+             }
+
+
+?>
+            
 <?php
     mysqli_close($con);
 ?>
