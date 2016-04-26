@@ -69,7 +69,7 @@ $sql = "SELECT * FROM Death WHERE season <= ".$season_number." ORDER BY season D
 $result = mysqli_query($con, $sql);
 
 while($row = mysqli_fetch_array($result)) {
-	fputcsv($output, array($row["name"], $row["killer"], $row["manner"], $row["manner"]));
+	fputcsv($output, array($row["name"], $row["killer"], $row["manner"], $row["season"]));
 }
 fputcsv($output, array('','',''));
 fputcsv($output, array('Marriages', '', ''));

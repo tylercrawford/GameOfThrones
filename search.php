@@ -8,6 +8,7 @@ $death = $_POST["death"];
 $marriage = $_POST["marriage"];
 $loyal = $_POST["loyal"];
 
+
 if($marriage === "true") {
 	     $query = "SELECT * FROM MarriedTo WHERE husband = '" . $person . "' OR wife = '" . $person . "';";
 	     $result = mysqli_query($con, $query);
@@ -52,6 +53,9 @@ if($loyal === "true") {
 	     	    echo "<br><br>";
 	     	    }
              }
+if($person) {
+	echo "<br><br><button onClick='viewPerson()' class='btn btn-default'>View ".$person."</button>";
+}
 
 
 ?>
