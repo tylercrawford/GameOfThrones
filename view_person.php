@@ -32,9 +32,13 @@ endif;
         $("#season").text('Season ' + season);
         document.location.reload(true);
       }
+      function viewPerson(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_person.php?name="+id;
+      }
+
       $(document).ready(function(){
         $("#season").text('Season ' + <?php echo $season_number; ?>);
-
       });
     </script>
   </head>
@@ -73,7 +77,7 @@ endif;
       <table> 
         <tr>
           <td>
-            <table class="table table-hover">
+            <table class="table">
             <?php
                 $name = $_GET["name"];
                 $sql = "SELECT * FROM Person WHERE p_name='".$name."'";
@@ -86,23 +90,97 @@ endif;
                   $house = $row["house"];
                   $birth = $row["birthyear"];
                 ?>
+                
                 <tr>
-                  <td width='400' height='40'><?php echo $row['p_name']; ?></td>
-                </tr>
-                <tr>
-                  <td width='400' height='40'><?php echo $house; ?></td>
-                </tr>
-                <tr>
-                  <td width='400' height='40'><?php echo $birth; ?></td>
+                  <?php
+                  if ($birth) {
+                    echo "<td width='400' height='40'><b>Born: </b>". $birth ." AC</td>";
+                  }
+                  else {
+                    echo "<td width='400' height='40'><b>Born: </b> unknown</td>";
+
+                  }
+                  ?>
                 </tr>
                 <?php
+                }
+
+                $sql = "SELECT * FROM Death WHERE name='".$name."' AND season <= " . $season_number . "";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Status: Dead</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Killed by ".$row["killer"]."</td></tr>";
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manner: ".$row["manner"]."</td></tr>";
+                  } 
+                }
+                else {
+                  echo "<tr><td><b>Status: Alive</b></td></tr>";
                 }
                 $sql = "SELECT * FROM Title WHERE name='".$name."' AND season <= " . $season_number . "";
                 $result = mysqli_query($con, $sql);
                 if ($result->num_rows > 0) {
-                  echo "<tr><td>Titles!!!!</td></tr>";
+                  echo "<tr><td><b>Titles</b></td></tr>";
                   while($row = mysqli_fetch_array($result)) {
-                    echo $row["title"];
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["title"]."</td></tr>";
+                  } 
+                }
+                $sql = "SELECT * FROM LoyalTo WHERE p_name='".$name."' AND season <= " . $season_number . "";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Loyal To</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["house"]."</td></tr>";
+                  } 
+                }
+                $sql = "SELECT * FROM Alias WHERE name='".$name."'";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Also known as</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["alias"]."</td></tr>";
+                  } 
+                }
+                $sql = "SELECT wife AS 'spouse' FROM MarriedTo WHERE husband = '".$name."' AND season <= ". $season_number ." GROUP BY husband UNION SELECT husband AS 'spouse' FROM MarriedTo WHERE wife = '".$name."' AND season <= ".$season_number." GROUP BY wife";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Married To</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    ?>
+                    <tr><td onClick="viewPerson('<?php echo $row["spouse"]; ?>')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row["spouse"]; ?></td></tr>
+                    <?php
+                  } 
+                }
+                $sql = "SELECT * FROM FoughtIn JOIN Battle WHERE FoughtIn.battle = Battle.b_name AND Battle.season <= ".$season_number." AND FoughtIn.p_name = '".$name."'";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Fought In</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["b_name"]."</td></tr>";
+                  } 
+                }
+                $sql = "SELECT * FROM ChildTo WHERE mother = '".$name."' OR father = '".$name."'";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  echo "<tr><td><b>Children</b></td></tr>";
+                  while($row = mysqli_fetch_array($result)) {
+                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["name"]."</td></tr>";
+                  } 
+                }
+                $sql = "SELECT * FROM ChildTo WHERE name = '".$name."'";
+                $result = mysqli_query($con, $sql);
+                if ($result->num_rows > 0) {
+                  while($row = mysqli_fetch_array($result)) {
+                    $mother = $row["mother"];
+                    if ($mother == "") {
+                      $mother = "unknown";
+                    }
+                    $father = $row["father"];
+                    if ($father == "") {
+                      $father = "unknown";
+                    }
+
+                    echo "<tr><td><b>Mother: </b>".$mother."&nbsp;&nbsp;&nbsp;&nbsp;<b>Father: </b>".$row["father"]."</td></tr>";
                   } 
                 }
                 
