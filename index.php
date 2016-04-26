@@ -50,6 +50,8 @@
             }
         ?>
     </body>
+    <embed src="theme_music.mp3" width="180" height="0" loop="true" autostart="true"/>
+
 </html>
 
 <?php
