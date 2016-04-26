@@ -20,39 +20,44 @@
                 echo("<a href='logout.php'>Logout</a>");
             }
         ?>
-        <h3>FORM</h3>
-        <form name = "searchform" action = "search.php" method = "POST">
-            <select name="drop">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>    
-            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
-            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
-        </form>
-        <?php
-            $sql = "SELECT * FROM Person";
 
-            $result = mysqli_query($con, $sql);
-        ?>
-        <h3>SEARCH FORM</h3>
-        <form name = "searchform" action = "search.php" method = "POST">
-            <!-- Username: <br/><input type = "text" name = "username" maxlength = "50" required><br />  -->
-            Text: <br/><input type = "text" name = "text" maxlength = "50" required><br /> <br/>
-            <input type = "submit" class="btn btn-default" name = "submit" value = "Submit">
-        </form>
-        <?php
-            while($row = mysqli_fetch_array($result)) {
-                echo $row['p_name'];
-                echo " " . $row['birthyear'];
-                echo "<br>";
-            }
-        ?>
-    </body>
-    <embed src="theme_music.mp3" width="180" height="0" loop="true" autostart="true"/>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="./index.html">Home</a></li>
+      <li><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./search.html">Search</a></li>
+          <li><a href="#">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
 
+<p>Created for CS4750 at the University of Virginia.</p>      
+<p>Written by Kyle West, Scott Mallory, Tyler Crawford</p>      
+  
+<div class="container"> 
+<center>
+    <img src="images/GoT_logo.png" width="800">
+</center>
+</div>
+
+<div class="container"> 
+  <br>
+  <p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>   
+</div>
+
+<!-- <embed src="theme_music.mp3">
+<noembed>
+    <bgsound src="theme_music.mp3" repeat="true">
+</noembed> -->
+
+<embed src="theme_music.mp3" width="180" height="0" loop="true" autostart="true"/>
+</body>
 </html>
+
 
 <?php
     mysqli_close($con);

@@ -73,7 +73,7 @@ endif;
           <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
           <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
           <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
-          <li class="dropdown">
+          <li style="float:right">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
             <ul class="dropdown-menu">

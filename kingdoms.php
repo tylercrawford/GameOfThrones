@@ -100,28 +100,28 @@ endif;
           <td>
             <div id="images">
               <div id="westeros">
-                <img src="images/westeros.png" width="400">
+                <img src="images/westeros.png" width="360">
               </div>
               <div id="The_North" hidden="true">
-                <img src="images/The North.png" width="400" >
+                <img src="images/The North.png" width="360" >
               </div>
               <div id="The_Reach" hidden="True">
-                <img src="images/The Reach.png" width="400" >
+                <img src="images/The Reach.png" width="360" >
               </div>
               <div id="Dorne" hidden="True">
-                <img src="images/Dorne.png" width="400" >
+                <img src="images/Dorne.png" width="360" >
               </div>
               <div id="The_Vale" hidden="true">
-                <img src="images/The Vale.png" width="400" >
+                <img src="images/The Vale.png" width="360" >
               </div>
               <div id="The_Riverlands" hidden="true">
-                <img src="images/The Riverlands.png" width="400" >
+                <img src="images/The Riverlands.png" width="360" >
               </div>
               <div id="The_Stormlands" hidden="true">
-                <img src="images/The Stormlands.png" width="400" >
+                <img src="images/The Stormlands.png" width="360" >
               </div>
               <div id="The_Westerlands" hidden="true">
-                <img src="images/The Westerlands.png" width="400" >
+                <img src="images/The Westerlands.png" width="360" >
               </div>
 
             </div>
