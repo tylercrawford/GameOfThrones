@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION["season"])):
+  $season_number = $_SESSION["season"];
+  //echo " is logged in the session";
+else:
+  // No user is logged in, thus redirect to home.php
+  $_SESSION["season"] = 1;
+endif;  
+?>
 
 <html>
   <head>
@@ -8,19 +18,46 @@
 
     <script type="text/javascript">
       
-      function myFunction2(id) {
-            $("#lords > *").hide();
-            var season = "season_"+id;
+      // function myFunction2(id) {
+      //       $("#lords > *").hide();
+      //       var season = "season_"+id;
 
-            $("#"+season).show();
-            $("#season").text('Season ' + id);
-      }
+      //       $("#"+season).show();
+      //       $("#season").text('Season ' + id);
+      // }
       function myFunction(id) {
         var doc_id = id.replace(" ", "_");
         document.location = "view_person.php?name="+id;
       }
 
     </script>
+    <script type="text/javascript">
+      function seasonChange(season) {
+        var season_val = season;
+        // alert(season_val);
+        $.ajax({
+          type:"POST",
+          url: "season.php",
+          data: {season : season_val},
+            success: function(data) {
+              // alert(data);
+            }
+          });
+        $("#season").text('Season ' + season);
+        $("#lords > *").hide();
+        var season = "season_"+season_val;
+
+        $("#"+season).show();
+      }
+      $(document).ready(function(){
+        $("#season").text('Season ' + <?php echo $season_number; ?>);
+        $("#lords > *").hide();
+        var season = "season_"+<?php echo $season_number; ?>;
+
+        $("#"+season).show();
+      });
+    </script>
+
   </head>
 
   <?php
@@ -34,20 +71,20 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
+          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
             <ul class="dropdown-menu">
               <center>
-              <li><p onClick="myFunction2('1')">Season 1</p></li>
-              <li><p onClick="myFunction2('2')">Season 2</p></li>
-              <li><p onClick="myFunction2('3')">Season 3</p></li>
-              <li><p onClick="myFunction2('4')">Season 4</p></li>
-              <li><p onClick="myFunction2('5')">Season 5</p></li>
+              <li><p onClick="seasonChange('1')">Season 1</p></li>
+              <li><p onClick="seasonChange('2')">Season 2</p></li>
+              <li><p onClick="seasonChange('3')">Season 3</p></li>
+              <li><p onClick="seasonChange('4')">Season 4</p></li>
+              <li><p onClick="seasonChange('5')">Season 5</p></li>
             </ul>
           </li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
         </ul>
       </div>
     </nav>
