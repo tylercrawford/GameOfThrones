@@ -13,32 +13,28 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="./index.html">Home</a></li>
-	  <li><a href="./kingdoms.php">Explore</a></li>
+	    <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
           <li><a href="#">Admin</a></li>
         </ul>
       </div>
     </nav>
 
-<p>Created for CS4750 at the University of Virginia.</p>      
-<p>Written by Kyle West, Scott Mallory, Tyler Crawford</p>      
-  
-<div class="container"> 
-<center>
-	<img src="images/GoT_logo.png" width="800">
-</center>
+<div class="container">
+  <h1>Database Status</h1>
+
+  <div class="alert alert-success">
+<?php
+    $server = "stardock.cs.virginia.edu";
+    $con = new mysqli($server, 'cs4750sam4ku', 'scott', 'cs4750sam4ku');
+    if (mysqli_connect_errno())
+    {
+        echo "Failed to connect to MYSQL: " . mysqli_connect_error();
+    }
+    echo "Successfully connected to <strong>" . $server . "!</strong>";
+?>
+  </div>
 </div>
 
-<div class="container"> 
-  <br>
-  <p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>   
-</div>
-
-<!-- <embed src="theme_music.mp3">
-<noembed>
-	<bgsound src="theme_music.mp3" repeat="true">
-</noembed> -->
-
-<embed src="theme_music.mp3" width="180" height="0" loop="true" autostart="true"/>
 </body>
 </html>
