@@ -19,17 +19,22 @@
    });
     
     $(document).ready(function(){
-       $("#submit").on('click', function(){
+       $("#submit").on("click",function(){
+          var marriage = $('input[name="marriage"]').prop('checked');
+          var loyal = $('input[name="loyal"]').prop('checked');
+          var death = $('input[name="death"]').prop('checked');
           $.ajax({
           type:"POST",
           url: "search.php",
-          data: {person : $("#search-box").val(), season : $("#season").val(), question : $("#question").val()},
+          data: {person : $("#search-box").val(), marriage : marriage, loyal : loyal, death : death},
           success: function(data) {
              $("#results").html(data);
           }
           });
        });
     });
+
+
 //To select Person name
 function selectPerson(val) {
 $("#search-box").val(val);
@@ -44,40 +49,41 @@ $("#suggestion-box").hide();
 
 <body>
 
-  <h3>SEARCH FORM</h3>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./kingdoms.php">Explore</a></li>
+          <li class="active"><a href="./search.html">Search</a></li>
+          <li><a href="#">Admin</a></li>
+        </ul>
+      </div>
+    </nav>
 
-  <div class="frmsearch">
+      <div class="container">
+    
+	<h1>Search for a  Character</h1>
+	<br><br>
+	  <div class="col-xs-7 col-centered">
+	    <label for="search-box"></label>
+	       <input type="text" class="form-control" id="search-box" type="search">
+	    <div id="suggestion-box"></div>
+	    
+	    <div id="question-box">
+	      <input type="checkbox" name="marriage" value="MarriedTo" id="marriage">Spouse</option>
+              <input type="checkbox" name="death" value="Death" id="death">Victims</option>
+              <input type="checkbox" name="loyal" value="LoyalTo" id="loyal">Loyalty</option>
+            </div>
+            <div>
+	      <button type="button" id="submit">Search</button>
+	    </div>
 
-     <input type="text" placeholder="Search..." id="search-box">
-     <div id ="suggestion-box"></div>
-
-     <div id="question-box"> Question?
-       <select name="Question" id="question">
-	 <option value="MarriedTo">Spouse</option>
-	 <option value="Death">Victims</option>
-	 <option value="LoyalTo">Loyalty</option>
-       </select>
-     </div>
-     
-     <div id="season-box">Season?
-       <select name="season" id="season">
-	 <option value="1">1</option>
-	 <option value="2">2</option>
-	 <option value="3">3</option>
-	 <option value="4">4</option>
-	 <option value="5">5</option>
-       </select>
-     </div>
-   
-     <div>
-       <button type="button" id="submit">Search</button>
-     </div>
-  </div>
-
-  <div id="results">
-    <p>Results</p>
-  </div
+      <div id="results">
+	<p>Results</p>
+      </div>
+</div>
 </body>
-
-
 </html>

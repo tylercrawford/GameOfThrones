@@ -1,7 +1,7 @@
 <?php
 require_once("config.php");
 if(!empty($_POST["keyword"])) {
-$query ="SELECT * FROM Person WHERE p_name like '" . $_POST["keyword"] . "%' ORDER BY p_name";
+$query ="SELECT * FROM Person WHERE p_name like '%" . $_POST["keyword"] . "%' ORDER BY p_name";
 $result = mysqli_query($con, $query);
 if(!empty($result)) {
 ?>
