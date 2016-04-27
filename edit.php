@@ -20,7 +20,7 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="./index.html">Home</a></li>
+              <li><a href="./index.php">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
@@ -52,16 +52,12 @@
             <div class="col-sm-2" style="text-align: center">
                 <h2 style='text-align: center'>Edit table:</h2>
                 <select onchange="submit_drop()" id="dropdown" class="form-control" style="text-align: center">
-            </div>
-                <?php
-                    $query = "SHOW TABLES";
-                    $result = mysqli_query($con, $query);
-                    while ($row = mysqli_fetch_array($result)) {
-                        $value = $row[0];
-                        echo("<option id=$value value=$value>$value</option>");
-                    }
-                ?>
+                    <option>-- Select --</option>
+                    <option>Person</option>
+                    <option>House</option>
+                    <option>MarriedTo</option>
             </select>
+            </div>
             <input type="hidden" name="table" id="table">
             <input hidden type="submit" value="hi">
         </form>

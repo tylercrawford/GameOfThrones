@@ -13,25 +13,42 @@
         $result = mysqli_query($con, $sql);
 
         if ($result == TRUE) {
-            echo "The " . $house . " House has successfully been deleted";
+            setcookie("delete", "House", time()+30);
+            setcookie("status", "success", time()+30);
+            header("Location: edit_table.php?table=House");
         } else {
-            echo "Deletion failed: " . mysqli_error($result);
+            setcookie("delete", "House", time()+30);
+            setcookie("status", "failure", time()+30);
+            header("Location: edit_table.php?table=House");
         }
-
-        echo "<br><br>";
-        echo "<a href='edit_table.php?table=House'>Back</a>";
     } else if ($table == "Person") {
         $person = $_GET["person"];
         $sql = "DELETE FROM Person WHERE p_name = '" . $person . "';";
         $result = mysqli_query($con, $sql);
 
         if ($result == TRUE) {
-            echo $person . " has successfully been deleted";
+            setcookie("delete", "Person", time()+30);
+            setcookie("status", "success", time()+30);
+            header("Location: edit_table.php?table=Person");
         } else {
-            echo "Deletion failed: " . mysqli_error($result);
+            setcookie("delete", "Person", time()+30);
+            setcookie("status", "failure", time()+30);
+            header("Location: edit_table.php?table=Person");
         }
+    } else if ($table == "MarriedTo") {
+        $husband = $_GET["husband"];
+        $wife = $_GET["wife"];
+        $sql = "DELETE FROM MarriedTo WHERE husband = '" . $husband . "' AND wife = '" . $wife . "';";
+        $result = mysqli_query($con, $sql);
 
-        echo "<br><br>";
-        echo "<a href='edit_table.php?table=Person'>Back</a>";
+        if ($result == TRUE) {
+            setcookie("delete", "MarriedTo", time()+30);
+            setcookie("status", "success", time()+30);
+            header("Location: edit_table.php?table=MarriedTo");
+        } else {
+            setcookie("delete", "MarriedTo", time()+30);
+            setcookie("status", "failure", time()+30);
+            header("Location: edit_table.php?table=MarriedTo");
+        }
     }
 ?>
