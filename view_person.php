@@ -38,6 +38,14 @@ endif;
         var doc_id = id.replace(" ", "_");
         document.location = "view_person.php?name="+id;
       }
+      function viewHouse(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_house.php?house="+id;
+      }
+      function viewKingdom(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_kingdom.php?kingdom="+id;
+      }
 
       $(document).ready(function(){
         $("#season").text('Season ' + <?php echo $season_number; ?>);
@@ -167,7 +175,9 @@ endif;
                 if ($result->num_rows > 0) {
                   echo "<tr><td><b>Children</b></td></tr>";
                   while($row = mysqli_fetch_array($result)) {
-                    echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["name"]."</td></tr>";
+                    ?>
+                    <tr><td onClick="viewPerson('<?php echo $row["name"]; ?>')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row["name"]; ?></td></tr>
+                    <?php
                   } 
                 }
                 $sql = "SELECT * FROM ChildTo WHERE name = '".$name."'";
@@ -208,10 +218,14 @@ endif;
                 $result = mysqli_query($con, $sql);
 
                 while($row = mysqli_fetch_array($result)) {
-                    echo "<b>House:</b> " . $row['h_name'] . "<br>";
-                    echo "<b>Castle: </b>" . $row['castle'] . "<br>";
-                    echo "<b>Kingdom: </b>" . $row['kingdom'];
-                    ?>
+                  ?>
+                  <p onClick="viewHouse('<?php echo $row["h_name"]; ?>')">
+                    <b>House:</b> <?php echo $row['h_name']; ?> <br></p>
+                  <p>
+                    <b>Castle:</b> <?php echo $row['castle']; ?> <br></p>
+                  <p onClick="viewKingdom('<?php echo $row["kingdom"]; ?>')">
+                    <b>Kingdom:</b> <?php echo $row['kingdom']; ?> <br></p>
+
                     <script type="text/javascript">
                         var image = <?php echo $row['image']; ?>;
                         if (image) {

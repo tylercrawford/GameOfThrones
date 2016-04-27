@@ -31,6 +31,10 @@ endif;
         var doc_id = id.replace(" ", "_");
         document.location = "view_person.php?name="+id;
       }
+      function viewKingdom(id) {
+        var doc_id = id.replace(" ", "_");
+        document.location = "view_kingdom.php?kingdom="+id;
+      }
 
     </script>
     <script type="text/javascript">
@@ -193,10 +197,14 @@ endif;
                 $result = mysqli_query($con, $sql);
 
                 while($row = mysqli_fetch_array($result)) {
-                    echo "<b>Words:</b> " . $row['words'] . "<br>";
-                    echo "<b>Castle: </b>" . $row['castle'] . "<br>";
-                    echo "<b>Kingdom: </b>" . $row['kingdom'];
-                    ?>
+                  ?>
+                  <p>
+                    <b>Words:</b> <?php echo $row['words']; ?> <br></p>
+                  <p>
+                    <b>Castle:</b> <?php echo $row['castle']; ?> <br></p>
+                  <p onClick="viewKingdom('<?php echo $row["kingdom"]; ?>')">
+                    <b>Kingdom:</b> <?php echo $row['kingdom']; ?> <br></p>
+                    
                     <script type="text/javascript">
                         var image = <?php echo $row['image']; ?>;
                         if (image) {
