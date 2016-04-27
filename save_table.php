@@ -38,6 +38,18 @@
             }
             echo "<br></br>";
             echo "<a href='edit_table.php?table=Person'>Back</a>";
+        } else {
+            $originalPerson = $_POST["originalPerson"];
+            $sql = "UPDATE Person SET p_name = '" . $name . "', house = '" . $house . "', birthyear = '" . $birthyear . "' 
+            WHERE p_name = '" . $originalPerson . "';";
+            $result = mysqli_query($con, $sql);
+            if ($result == TRUE) {
+                echo $originalPerson . " has been updated";
+            } else {
+                echo "Update failed: " . mysqli_error($result);
+            }
+            echo "<br></br>";
+            echo "<a href='edit_table.php?table=Person'>Back</a>";
         }
     } else if ($table == "MarriedTo") {
         $husband = $_POST["husband"];

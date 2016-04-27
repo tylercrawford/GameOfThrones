@@ -163,6 +163,7 @@
                                 }
                                 echo "</select></td>";
                                 echo '<td><input type="number" name="birthyear" value="' . $row[2] . '" class="form-control"></td>';
+                                echo "<input type='hidden' name='originalPerson' value='" . $row[0] . "'>";
                             }
                         ?>
                     </tr>
