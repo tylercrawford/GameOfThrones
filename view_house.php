@@ -166,7 +166,7 @@ endif;
             <table class="table table-hover">
             <?php
                 $house = $_GET["house"];
-                $sql = "SELECT * FROM Person WHERE house='".$house."'";
+                $sql = "SELECT * FROM Person WHERE house='".$house."' ORDER BY birthyear";
 
 
                 $result = mysqli_query($con, $sql);

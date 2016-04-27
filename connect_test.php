@@ -12,10 +12,10 @@
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="./index.html">Home</a></li>
+          <li class="active"><a href="./index.php">Home</a></li>
 	    <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
-          <li><a href="#">Admin</a></li>
+          <li><a href="./statistics.html">Statistics</a></li>
         </ul>
       </div>
     </nav>
