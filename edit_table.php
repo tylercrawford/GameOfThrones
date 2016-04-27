@@ -20,12 +20,12 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="./index.html">Home</a></li>
+              <li><a href="./index.html">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
                 if (isset($_SESSION['logged_in']) && $_SESSION["logged_in"] == TRUE) {
-                    echo '<li><a href="./edit.php">Admin</a></li>';
+                    echo '<li class="active"><a href="./edit.php">Admin</a></li>';
                 }
               ?>
             </ul>
@@ -42,12 +42,19 @@
         </nav>
 
         <div style="margin-left: 50px; margin-right: 50px">
+            <input type="button" class="btn btn-small" onclick="location.href='edit.php'" 
+             value="Back" style="background-color: blue; color:white;">
         <?php
             $table = $_GET['table'];
             if ($table == "Person") {
                 ?>
                 <input type="button" onclick="location.href='edit_row.php?table=Person&person=new'" 
                 value="Add Person" class="btn btn-small pull-right" style="background-color: green; color: white">
+        <?php
+            } else if ($table == "MarriedTo") {
+        ?>
+            <input type="button" onclick="location.href='edit_row.php?table=MarriedTo&husband=new&wife=new'" 
+                value="Add Marriage" class="btn btn-small pull-right" style="background-color: green; color: white">
         <?php
             }
         ?>
@@ -94,8 +101,28 @@
                         echo "<td><a href='delete_row.php?table=Person&person=" . $row[0] . "'>Delete</a></td>";
                         echo "</tr>";
                     }
-                }
+                } else if ($table == "MarriedTo") {
+                    echo "<tr>";
+                    echo "<th>Husband</th>";
+                    echo "<th>Wife</th>";
+                    echo "<th>Season</th>";
+                    echo "<th></th><th></th>";
+                    echo "</tr>";
 
+                    $sql = "SELECT * FROM MarriedTo";
+                    $result = mysqli_query($con, $sql);
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row[0] . "</td>";
+                        echo "<td>" . $row[1] . "</td>";
+                        echo "<td>" . $row[2] . "</td>";
+                        echo "<td><a href='edit_row.php?table=MarriedTo&husband=" . $row[0] . "&wife=" . $row[1] . "'>
+                        Edit</a></td>";
+                        echo "<td><a href='delete_row.php?table=MarriedTo&husband=" . $row[0] . "&wife=" . $row[1] . "'>
+                        Delete</a></td>";
+                        echo "</tr>";
+                    }
+                }
                 
             ?>
         </table>

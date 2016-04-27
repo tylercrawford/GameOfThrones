@@ -35,6 +35,21 @@
         if ($person == "new") {
             $new = TRUE;
         }
+    } else if ($table == "MarriedTo") {
+        $husband = $_GET["husband"];
+        $wife = $_GET["wife"];
+
+        $sql2 = "SELECT p_name FROM Person";
+        $result2 = mysqli_query($con, $sql2);
+        $people = [];
+        while ($row = mysqli_fetch_array($result2)) {
+            array_push($people, $row[0]);
+        }
+
+        $new = FALSE;
+        if ($husband == "new") {
+            $new = TRUE;
+        }
     }
 ?>
 
@@ -51,12 +66,12 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="./index.html">Home</a></li>
+              <li><a href="./index.html">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
                 if (isset($_SESSION['logged_in']) && $_SESSION["logged_in"] == TRUE) {
-                    echo '<li><a href="./edit.php">Admin</a></li>';
+                    echo '<li class="active"><a href="./edit.php">Admin</a></li>';
                 }
               ?>
             </ul>
@@ -113,15 +128,15 @@
                         <th>Birthyear</th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="name"></td>
-                        <td><select name="house">
+                        <td><input type="text" name="name" class="form-control"></td>
+                        <td><select name="house" class="form-control">
                             <option value="">-- Select --</option>
                             <?php
                                 foreach ($houses as $house) {
                                     echo "<option value='" . $house . "'>" . $house . "</option>";
                                 }
                             ?></select></td>
-                        <td><input type="number" name="birthyear"></td>
+                        <td><input type="number" name="birthyear" class="form-control"></td>
                     </tr>
                     <input type="hidden" name="typeOfTable" value="Person">
                     <input type="hidden" name="newOrUpdate" value="new">
@@ -136,8 +151,8 @@
                     <tr>
                         <?php
                             while ($row = mysqli_fetch_array($result)) {
-                                echo '<td><input type="text" name="name" value="' . $row[0] . '"></td>';
-                                echo '<td><select name="house">';
+                                echo '<td><input type="text" name="name" value="' . $row[0] . '" class="form-control"></td>';
+                                echo '<td><select name="house" class="form-control">';
                                 echo '<option value="">-- Select --</option>';
                                 foreach ($houses as $house) {
                                     if ($house == $row[1]) {
@@ -147,12 +162,41 @@
                                     }
                                 }
                                 echo "</select></td>";
-                                echo '<td><input type="number" name="birthyear" value="' . $row[2] . '"></td>';
+                                echo '<td><input type="number" name="birthyear" value="' . $row[2] . '" class="form-control"></td>';
                             }
                         ?>
                     </tr>
                     <input type="hidden" name="typeOfTable" value="Person">
                     <input type="hidden" name="newOrUpdate" value="edit">
+                <?php
+                    } else if ($table == "MarriedTo" && $new == TRUE) {
+                ?>
+                        <tr>
+                        <th>Husband</th>
+                        <th>Wife</th>
+                        <th>Season</th>
+                        </tr>
+                        <tr>
+                            <?php
+                                echo "<td><select name='husband' class='form-control'>";
+                                echo '<option value="">-- Select --</option>';
+                                foreach ($people as $person) {
+                                    echo "<option value='" . $person . "'>" . $person . "</option>";
+                                }
+                                echo "</select></td>";
+
+                                echo "<td><select name='wife' class='form-control'>";
+                                echo '<option value="">-- Select --</option>';
+                                foreach ($people as $person) {
+                                    echo "<option value='" . $person . "'>" . $person . "</option>";
+                                }
+                                echo "</select></td>";
+                            ?>
+                            <td><input type="number" name="season" class="form-control"></td>
+                        </tr>
+
+                        <input type="hidden" name="typeOfTable" value="MarriedTo">
+                        <input type="hidden" name="newOrUpdate" value="new">
                 <?php
                     }
                 ?>
@@ -164,11 +208,18 @@
                 <?php
                     if ($table == "House") {
                 ?>
-                        <input type='button' class='btn btn-small pull-right' style='background-color: blue; color: white;' value='Back' onclick='location.href="edit_table.php?table=House"'>
+                        <input type='button' class='btn btn-small pull-right' style='background-color: blue; color: white;' 
+                        value='Back' onclick='location.href="edit_table.php?table=House"'>
                 <?php
                     } else if ($table == "Person") {
                 ?>
-                        <input type='button' class='btn btn-small pull-right' style='background-color: blue; color: white;' value='Back' onclick='location.href="edit_table.php?table=Person"'>
+                        <input type='button' class='btn btn-small pull-right' style='background-color: blue; color: white;' 
+                        value='Back' onclick='location.href="edit_table.php?table=Person"'>
+                <?php
+                    } else if ($table == "MarriedTo") {
+                ?>
+                        <input type='button' class='btn btn-small pull-right' style='background-color: blue; color: white;' 
+                        value='Back' onclick='location.href="edit_table.php?table=MarriedTo"'>
                 <?php
                     }
                 ?>

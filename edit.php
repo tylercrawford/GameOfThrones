@@ -20,12 +20,12 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="./index.html">Home</a></li>
+              <li><a href="./index.html">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
                 if (isset($_SESSION['logged_in']) && $_SESSION["logged_in"] == TRUE) {
-                    echo '<li><a href="./edit.php">Admin</a></li>';
+                    echo '<li class="active"><a href="./edit.php">Admin</a></li>';
                 }
               ?>
             </ul>

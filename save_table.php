@@ -39,5 +39,22 @@
             echo "<br></br>";
             echo "<a href='edit_table.php?table=Person'>Back</a>";
         }
+    } else if ($table == "MarriedTo") {
+        $husband = $_POST["husband"];
+        $wife = $_POST["wife"];
+        $season = $_POST["season"];
+        $newOrUpdate = $_POST["newOrUpdate"];
+
+        if ($newOrUpdate == "new") {
+            $sql = "INSERT INTO MarriedTo (husband, wife, season) VALUES ('" . $husband . "', '" . $wife . "', '" . $season . "');";
+            $result = mysqli_query($con, $sql);
+            if ($result == TRUE) {
+                echo "Marriage has succesfully been added";
+            } else {
+                echo "Insertion failed: " . mysqli_error($result);
+            }
+            echo "<br><br>";
+            echo "<a href='edit_table.php?table=MarriedTo'>Back</a>";
+        }
     }
 ?>
