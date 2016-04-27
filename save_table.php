@@ -12,15 +12,33 @@
         $kingdom = $_POST["kingdom"];
         $words = $_POST["words"];
         $originalHouse = $_POST["originalHouse"];
-        $sql = "UPDATE House SET h_name = '" . $name . "', castle = '" . $castle . "', kingdom = '" . $kingdom . "', words = '" . $words . "' WHERE h_name = '" . $originalHouse . "';";
-        $result = mysqli_query($con, $sql);
-        if ($result == TRUE) {
-            echo "House successfully updated";
+        $newOrUpdate = $_POST["newOrUpdate"];
+
+        if ($newOrUpdate == "new") {
+            $sql = "INSERT INTO House (h_name, castle, kingdom, words) VALUES ('" . $name . "', '" . $castle . "', '" . $kingdom . "', '" . $words . "')";
+                $result = mysqli_query($con, $sql);
+                if ($result == TRUE) {
+                    setcookie("insert", "House", time()+30);
+                    setcookie("status", "success", time()+30);
+                    header("Location: edit_table.php?table=House");
+                } else {
+                    setcookie("insert", "House", time()+30);
+                    setcookie("status", "failure", time()+30);
+                    header("Location: edit_table.php?table=House");
+                }
         } else {
-            echo "Update failed: " . mysqli_error($result);
+            $sql = "UPDATE House SET h_name = '" . $name . "', castle = '" . $castle . "', kingdom = '" . $kingdom . "', words = '" . $words . "' WHERE h_name = '" . $originalHouse . "';";
+            $result = mysqli_query($con, $sql);
+            if ($result == TRUE) {
+                setcookie("update", "House", time()+30);
+                setcookie("status", "success", time()+30);
+                header("Location: edit_table.php?table=House");
+            } else {
+                setcookie("update", "House", time()+30);
+                setcookie("status", "failure", time()+30);
+                header("Location: edit_table.php?table=House");
+            }
         }
-        echo "<br><br>";
-        echo "<a href='edit_table.php?table=House'>Back</a>";
     } else if ($table == "Person") {
         $name = $_POST["name"];
         $house = $_POST["house"];
@@ -32,24 +50,28 @@
             VALUES ('" . $name . "', '" . $house . "', '" . $birthyear . "');";
             $result = mysqli_query($con, $sql);
             if ($result == TRUE) {
-                echo $name . " has been successfully added";
+                setcookie("insert", "Person", time()+30);
+                setcookie("status", "success", time()+30);
+                header("Location: edit_table.php?table=Person");
             } else {
-                echo "Insertion failed: " . mysqli_error($result);
+                setcookie("insert", "Person", time()+30);
+                setcookie("status", "failure", time()+30);
+                header("Location: edit_table.php?table=Person");
             }
-            echo "<br></br>";
-            echo "<a href='edit_table.php?table=Person'>Back</a>";
         } else {
             $originalPerson = $_POST["originalPerson"];
             $sql = "UPDATE Person SET p_name = '" . $name . "', house = '" . $house . "', birthyear = '" . $birthyear . "' 
             WHERE p_name = '" . $originalPerson . "';";
             $result = mysqli_query($con, $sql);
             if ($result == TRUE) {
-                echo $originalPerson . " has been updated";
+                setcookie("update", "Person", time()+30);
+                setcookie("status", "success", time()+30);
+                header("Location: edit_table.php?table=Person");
             } else {
-                echo "Update failed: " . mysqli_error($result);
+                setcookie("update", "Person", time()+30);
+                setcookie("status", "failure", time()+30);
+                header("Location: edit_table.php?table=Person");
             }
-            echo "<br></br>";
-            echo "<a href='edit_table.php?table=Person'>Back</a>";
         }
     } else if ($table == "MarriedTo") {
         $husband = $_POST["husband"];
@@ -61,12 +83,29 @@
             $sql = "INSERT INTO MarriedTo (husband, wife, season) VALUES ('" . $husband . "', '" . $wife . "', '" . $season . "');";
             $result = mysqli_query($con, $sql);
             if ($result == TRUE) {
-                echo "Marriage has succesfully been added";
+                setcookie("insert", "MarriedTo", time()+30);
+                setcookie("status", "success", time()+30);
+                header("Location: edit_table.php?table=MarriedTo");
             } else {
-                echo "Insertion failed: " . mysqli_error($result);
+                setcookie("insert", "MarriedTo", time()+30);
+                setcookie("status", "failure", time()+30);
+                header("Location: edit_table.php?table=MarriedTo");
             }
-            echo "<br><br>";
-            echo "<a href='edit_table.php?table=MarriedTo'>Back</a>";
+        } else {
+            $originalHusband = $_POST["originalHusband"];
+            $originalWife = $_POST["originalWife"];
+            $sql = "UPDATE MarriedTo SET husband = '" . $husband . "', wife = '" . $wife . "' 
+            WHERE husband = '" . $originalHusband . "' AND wife = '" . $originalWife . "';";
+            $result = mysqli_query($con, $sql);
+            if ($result == TRUE) {
+                setcookie("update", "MarriedTo", time()+30);
+                setcookie("status", "success", time()+30);
+                header("Location: edit_table.php?table=MarriedTo");
+            } else {
+                setcookie("update", "MarriedTo", time()+30);
+                setcookie("status", "failure", time()+30);
+                header("Location: edit_table.php?table=MarriedTo");
+            }
         }
     }
 ?>

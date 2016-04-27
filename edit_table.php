@@ -20,7 +20,7 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="./index.html">Home</a></li>
+              <li><a href="./index.php">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
@@ -44,6 +44,70 @@
         <div style="margin-left: 50px; margin-right: 50px">
             <input type="button" class="btn btn-small" onclick="location.href='edit.php'" 
              value="Back" style="background-color: blue; color:white;">
+             <?php
+             if (isset($_COOKIE["update"]) && isset($_COOKIE["status"])) {
+                if ($_COOKIE["status"] == "success") {
+            ?>
+                 <div class="alert alert-success">
+                    <?php 
+                        echo $_COOKIE["update"] . " table successfully updated";
+                        setcookie("update", "", time()-3600);
+                        setcookie("status", "", time()-3600);
+                    ?>
+                </div>
+            <?php
+                } else if ($_COOKIE["status"] == "failure") {
+            ?>
+                    <div class="alert alert-danger">
+                        Update failed
+                    </div>
+            <?php
+                    setcookie("update", "", time()-3600);
+                    setcookie("status", "", time()-3600);
+                }
+            } else if (isset($_COOKIE["insert"]) && isset($_COOKIE["status"])) {
+                if ($_COOKIE["status"] == "success") {
+            ?>
+                 <div class="alert alert-success">
+                    <?php 
+                        echo "Insertion successful";
+                        setcookie("insert", "", time()-3600);
+                        setcookie("status", "", time()-3600);
+                    ?>
+                </div>
+            <?php
+                } else if ($_COOKIE["status"] == "failure") {
+            ?>
+                    <div class="alert alert-danger">
+                        Insert failed
+                    </div>
+            <?php
+                    setcookie("insert", "", time()-3600);
+                    setcookie("status", "", time()-3600);
+                }
+            } else if (isset($_COOKIE["delete"]) && isset($_COOKIE["status"])) {
+                if ($_COOKIE["status"] == "success") {
+            ?>
+                 <div class="alert alert-success">
+                    <?php 
+                        echo "Deletion successful";
+                        setcookie("delete", "", time()-3600);
+                        setcookie("status", "", time()-3600);
+                    ?>
+                </div>
+            <?php
+                } else if ($_COOKIE["status"] == "failure") {
+            ?>
+                    <div class="alert alert-danger">
+                        Deletion failed
+                    </div>
+            <?php
+                    setcookie("delete", "", time()-3600);
+                    setcookie("status", "", time()-3600);
+                }
+            }
+            ?>
+
         <?php
             $table = $_GET['table'];
             if ($table == "Person") {
@@ -56,6 +120,11 @@
             <input type="button" onclick="location.href='edit_row.php?table=MarriedTo&husband=new&wife=new'" 
                 value="Add Marriage" class="btn btn-small pull-right" style="background-color: green; color: white">
         <?php
+            } else if ($table == "House") {
+        ?>
+                <input type="button" onclick="location.href='edit_row.php?table=House&house=new'" 
+                value="Add House" class="btn btn-small pull-right" style="background-color: green; color: white">  
+        <?php 
             }
         ?>
         <?php echo '<h2 style="text-align: center">Edit "' . $table . '" Table</h2>'; ?>
@@ -123,7 +192,6 @@
                         echo "</tr>";
                     }
                 }
-                
             ?>
         </table>
     </div>

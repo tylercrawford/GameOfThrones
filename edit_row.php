@@ -18,6 +18,11 @@
         while ($row = mysqli_fetch_array($result2)) {
             array_push($kingdoms, $row[0]);
         }
+
+        $new = FALSE;
+        if ($house == "new") {
+            $new = TRUE;
+        }
     } else if ($table == "Person") {
         $person = $_GET["person"];
 
@@ -38,6 +43,9 @@
     } else if ($table == "MarriedTo") {
         $husband = $_GET["husband"];
         $wife = $_GET["wife"];
+
+        $sql = "SELECT * FROM MarriedTo WHERE husband = '" . $husband . "' AND wife = '" . $wife . "';";
+        $result = mysqli_query($con, $sql);
 
         $sql2 = "SELECT p_name FROM Person";
         $result2 = mysqli_query($con, $sql2);
@@ -66,7 +74,7 @@
               <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="./index.html">Home</a></li>
+              <li><a href="./index.php">Home</a></li>
               <li><a href="./kingdoms.php">Explore</a></li>
               <li><a href="./search.html">Search</a></li>
               <?php
@@ -91,21 +99,22 @@
         <form method="POST" action="save_table.php" name="tableform">
             <table class="table table-striped table-hover">
                 <?php
-                    if ($table == "House") {
+                    if ($table == "House" && $new == FALSE) {
                 ?>
                     <tr>
                         <th>House Name</th>
                         <th>Castle</th>
                         <th>Kingdom</th>
                         <th>Words</th>
+                        <th></th>
                     </tr>
 
                     <tr>
                         <?php
                             while ($row = mysqli_fetch_array($result)) {
-                                echo "<td><input type='text' name='name' value='" . $row[0] . "'></td>";
-                                echo "<td><input type='text' name='castle' value='" . $row[1] . "'></td>";
-                                echo "<td><select name='kingdom'>";
+                                echo "<td><input type='text' name='name' value='" . $row[0] . "' class='form-control'></td>";
+                                echo "<td><input type='text' name='castle' value='" . $row[1] . "' class='form-control'></td>";
+                                echo "<td><select name='kingdom' class='form-control'>";
                                 foreach ($kingdoms as $kingdom) {
                                     if ($kingdom == $row[2]) {
                                         echo "<option selected value='" . $kingdom . "'>" . $kingdom . "</option>";
@@ -113,12 +122,37 @@
                                         echo "<option value='" . $kingdom . "'>" . $kingdom . "</option>";
                                     }
                                 }
-                                echo "<td><textarea rows='3' cols='30' name='words'>" . $row[3] . "</textarea></td>";
+                                echo "<td><textarea rows='3' cols='30' name='words' class='form-control'>" . $row[3] . "</textarea></td>";
                             }
                         ?>
                     </tr>
                     <input type="hidden" name="typeOfTable" value="House">
                     <input type="hidden" name="originalHouse" value=<?php echo $house; ?>>
+                <?php
+                    } else if ($table == "House" && $new == TRUE) {
+                ?>
+                    <tr>
+                        <th>House Name</th>
+                        <th>Castle</th>
+                        <th>Kingdom</th>
+                        <th>Words</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="name" class='form-control'></td>
+                        <td><input type="text" name="castle" class='form-control'></td>
+                        <td><select name="kingdom" class="form-control">
+                            <option>-- Select --</option>
+                <?php
+                    foreach ($kingdoms as $kingdom) {
+                        echo "<option value='" . $kingdom . "'>" . $kingdom . "</option>";
+                    }
+                ?>
+                        </select></td>
+                        <td><textarea rows='3' cols='30' name="words" class="form-control"></textarea></td>
+                        <input type="hidden" name="typeOfTable" value="House">
+                        <input type="hidden" name="newOrUpdate" value="new">
+                        <input type="hidden" name="originalHouse" value="house">
                 <?php
                     } else if ($table == "Person" && $new == TRUE) {
                 ?>
@@ -198,6 +232,47 @@
 
                         <input type="hidden" name="typeOfTable" value="MarriedTo">
                         <input type="hidden" name="newOrUpdate" value="new">
+                <?php
+                    } else if ($table == "MarriedTo" && $new == FALSE) {
+                ?>
+                    <tr>
+                        <th>Husband</th>
+                        <th>Wife</th>
+                        <th>Season</th>
+                    </tr>
+                    <tr>
+                        <?php
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo "<td><select name='husband' class='form-control'>";
+                                echo '<option value="">-- Select --</option>';
+                                foreach ($people as $person) {
+                                    if ($person == $husband) {
+                                        echo "<option value='" . $person . "' selected>" . $person . "</option>";
+                                    } else {
+                                        echo "<option value='" . $person . "'>" . $person . "</option>";
+                                    }
+                                }
+                                echo "</select></td>";
+
+                                echo "<td><select name='wife' class='form-control'>";
+                                echo '<option value="">-- Select --</option>';
+                                foreach ($people as $person) {
+                                    if ($person == $wife) {
+                                        echo "<option value='" . $person . "' selected>" . $person . "</option>";
+                                    } else {
+                                        echo "<option value='" . $person . "'>" . $person . "</option>";
+                                    }
+                                }
+                                echo "</select></td>";
+
+                                echo '<td><input type="number" name="season" value="' . $row[2] . '" class="form-control"></td>';
+                                echo '<input type="hidden" name="originalHusband" value="' . $row[0] . '">';
+                                echo '<input type="hidden" name="originalWife" value="' . $row[1] . '">';
+                            }
+                        ?>
+                    </tr>
+                    <input type="hidden" name="typeOfTable" value="MarriedTo">
+                    <input type="hidden" name="newOrUpdate" value="edit">
                 <?php
                     }
                 ?>
