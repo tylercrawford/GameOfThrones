@@ -50,7 +50,7 @@ if($loyal === "true") {
 	     }
 	     while( $row = $result->fetch_assoc()) {
 	     	    echo $row['house'];
-	     	    echo "<br><br>";
+	     	    echo "<br>";
 	     	    }
              }
 if($person) {
