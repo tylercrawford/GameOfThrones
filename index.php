@@ -11,19 +11,6 @@
     </head>
 
     <body>
-        <a href="login.html" id="login">Login</a>
-        <?php
-            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == TRUE) {
-                echo("<a href='edit.php'>Edit</a>");
-                echo(" | ");
-                echo("<a href='logout.php'>Logout</a>");
-                ?>
-                <script>
-                    $("#login").hide();
-                </script>
-                <?php
-            }
-        ?>
 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -32,9 +19,22 @@
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="./index.html">Home</a></li>
-      <li><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
-          <li><a href="#">Admin</a></li>
+          <?php
+            if (isset($_SESSION['logged_in']) && $_SESSION["logged_in"] == TRUE) {
+                echo '<li><a href="./edit.php">Admin</a></li>';
+            }
+          ?>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <?php
+                if (isset($_SESSION['logged_in']) && $_SESSION["logged_in"] == TRUE) {
+                    echo '<li><a href="./logout.php">Logout</a></li>';
+                } else {
+                    echo '<li><a href="./login.html">Login</a></li>';
+                }
+            ?>
         </ul>
       </div>
     </nav>

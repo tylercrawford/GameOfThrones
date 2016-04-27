@@ -19,6 +19,19 @@
         }
 
         echo "<br><br>";
-        echo "<a href='edit_table.php?table=House>Back</a>";
+        echo "<a href='edit_table.php?table=House'>Back</a>";
+    } else if ($table == "Person") {
+        $person = $_GET["person"];
+        $sql = "DELETE FROM Person WHERE p_name = '" . $person . "';";
+        $result = mysqli_query($con, $sql);
+
+        if ($result == TRUE) {
+            echo $person . " has successfully been deleted";
+        } else {
+            echo "Deletion failed: " . mysqli_error($result);
+        }
+
+        echo "<br><br>";
+        echo "<a href='edit_table.php?table=Person'>Back</a>";
     }
 ?>

@@ -21,5 +21,23 @@
         }
         echo "<br><br>";
         echo "<a href='edit_table.php?table=House'>Back</a>";
+    } else if ($table == "Person") {
+        $name = $_POST["name"];
+        $house = $_POST["house"];
+        $birthyear = $_POST["birthyear"];
+        $newOrUpdate = $_POST["newOrUpdate"];
+
+        if ($newOrUpdate == "new") {
+            $sql = "INSERT INTO Person (p_name, house, birthyear) 
+            VALUES ('" . $name . "', '" . $house . "', '" . $birthyear . "');";
+            $result = mysqli_query($con, $sql);
+            if ($result == TRUE) {
+                echo $name . " has been successfully added";
+            } else {
+                echo "Insertion failed: " . mysqli_error($result);
+            }
+            echo "<br></br>";
+            echo "<a href='edit_table.php?table=Person'>Back</a>";
+        }
     }
 ?>
