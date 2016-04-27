@@ -1,0 +1,18 @@
+body {
+    color: white;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/background.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-weight:normal;
+}
+
+#topid
+{
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+}

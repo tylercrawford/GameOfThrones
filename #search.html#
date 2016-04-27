@@ -1,9 +1,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
-
   </script>
   <script type="text/javascript">
     $(document).ready(function(){
@@ -19,10 +17,6 @@
           });
        });
    });
-
-    function viewPerson() {
-      document.location = "view_person.php?name="+ $("#search-box").val();
-    }
     
     $(document).ready(function(){
        $("#submit").on("click",function(){
@@ -64,37 +58,32 @@ $("#suggestion-box").hide();
           <li><a href="./index.html">Home</a></li>
           <li><a href="./kingdoms.php">Explore</a></li>
           <li class="active"><a href="./search.html">Search</a></li>
-          <li><a href="./statistics.php">Statistics</a></li>
-
           <li><a href="#">Admin</a></li>
         </ul>
       </div>
     </nav>
    </div>
-    <div class="container">
-      <center>
-    	<h1>Search for a  Character</h1>
-    	<br>
-        <div class="col-sm-4 col-centered"></div>
-        <div class="col-sm-4 col-centered">
-    	    <label for="search-box"></label>
-    	       <input type="text" class="form-control" id="search-box" type="search">
-    	    <div id="suggestion-box"></div>
-    	    
-    	    <div id="question-box">
-    	      <input type="checkbox" name="marriage" value="MarriedTo" id="marriage">Spouse</option>
-                  <input type="checkbox" name="death" value="Death" id="death">Victims</option>
-                  <input type="checkbox" name="loyal" value="LoyalTo" id="loyal">Loyalty</option>
-                </div>
-                <div>
-                  <br>
-    	      <button type="button" id="submit" class='btn btn-default'>Search</button>
-    	    </div>
+      <div class="container">
+
+	<h1>Search for a  Character</h1>
+	<br><br><center>
+	  <div class="col-sm-4 col-centered">
+	    <label for="search-box"></label>
+	       <input type="text" class="form-control" id="search-box" type="search">
+	    <div id="suggestion-box"></div>
+	    
+	    <div id="question-box">
+	      <input type="checkbox" name="marriage" value="MarriedTo" id="marriage">Spouse</option>
+              <input type="checkbox" name="death" value="Death" id="death">Victims</option>
+              <input type="checkbox" name="loyal" value="LoyalTo" id="loyal">Loyalty</option>
+            </div>
+            <div>
+	      <button type="button" id="submit">Search</button>
+	    </div>
 	  
-        </div>
-  
-  </div><center><br>
-      <div id="results" >
+</div>
+</center>
+      <div id="results">
       </div>
       
 </div>

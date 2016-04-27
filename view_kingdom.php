@@ -64,9 +64,10 @@ endif;
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+          <li><a href="./index.php">Home</a></li>
+          <li class="active"><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./search.html">Search</a></li>
+          <li><a href="./statistics.php">Statistics</a></li>
           <li class="dropdown" style="float:right">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>

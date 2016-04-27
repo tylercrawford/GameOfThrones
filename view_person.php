@@ -53,9 +53,10 @@ endif;
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="http://plato.cs.virginia.edu/~cpm4er/">Home</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/view/view.html">View Tables</a></li>
-          <li><a href="http://plato.cs.virginia.edu/~cpm4er/edit/edit.html">Edit Tables</a></li>
+          <li><a href="./index.php">Home</a></li>
+          <li class="active"><a href="./kingdoms.php">Explore</a></li>
+          <li><a href="./search.html">Search</a></li>
+          <li><a href="./statistics.php">Statistics</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" id="season" >Season
             </a>
@@ -141,7 +142,7 @@ endif;
                     echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row["alias"]."</td></tr>";
                   } 
                 }
-                $sql = "SELECT wife AS 'spouse' FROM MarriedTo WHERE husband = '".$name."' AND season <= ". $season_number ." GROUP BY husband UNION SELECT husband AS 'spouse' FROM MarriedTo WHERE wife = '".$name."' AND season <= ".$season_number." GROUP BY wife";
+                $sql = "(SELECT wife AS 'spouse' FROM MarriedTo WHERE husband = '".$name."' AND season <= ". $season_number ." ORDER BY season DESC LIMIT 1) UNION (SELECT husband AS 'spouse' FROM MarriedTo WHERE wife = '".$name."' AND season <= ".$season_number." ORDER BY season DESC LIMIT 1)";
                 $result = mysqli_query($con, $sql);
                 if ($result->num_rows > 0) {
                   echo "<tr><td><b>Married To</b></td></tr>";

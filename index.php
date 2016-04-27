@@ -7,6 +7,8 @@
     <head>
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="style2.css"/>
+
         <title>Game of Thrones</title>
     </head>
 
@@ -42,12 +44,6 @@
 <p>Created for CS4750 at the University of Virginia.</p>      
 <p>Written by Kyle West, Scott Mallory, Tyler Crawford</p>      
   
-<div class="container"> 
-<center>
-    <img src="images/GoT_logo.png" width="800">
-</center>
-</div>
-
 <div class="container"> 
   <br>
   <p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>   
