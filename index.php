@@ -20,7 +20,7 @@
           <a class="navbar-brand" href="#">History of The Seven Great Houses</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="./index.html">Home</a></li>
+          <li class="active"><a href="./index.php">Home</a></li>
           <li><a href="./kingdoms.php">Explore</a></li>
           <li><a href="./search.html">Search</a></li>
           <li><a href="./statistics.php">Statistics</a></li>
@@ -42,13 +42,20 @@
       </div>
     </nav>
 
-<p>Created for CS4750 at the University of Virginia.</p>      
-<p>Written by Kyle West, Scott Mallory, Tyler Crawford</p>      
-  
-<div class="container"> 
-  <br>
-  <p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>   
+
+<div class="container">
+  <div style="background-color:rgba(0, 0, 0, 0.5);" !important" class="jumbotron">
+    <div style="opacity:1.0;">
+    <h1>The Lineages and Histories of the Great Houses of the Seven Kingdoms</h1>      
+    <p>Explore and search through the bloodlines and ties between the great houses that rule Westeros's vast landscape!</p>
+    <p>Designed by Tyler Crawford, Scott Mallory, and Kyle West.
+    </div>
+  </div>
+  <center>
+  <p><button type="button" class="btn btn-default"><a href="connect_test.php">Check Database Availability</a></button></p>      
+  </center>
 </div>
+
 
 <!-- <embed src="theme_music.mp3">
 <noembed>
