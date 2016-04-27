@@ -6,9 +6,10 @@ if (isset($_SESSION["season"])):
 else:
   // No user is logged in, thus redirect to home.php
   $_SESSION["season"] = 1;
+  $season_number = $_SESSION["season"];
+
 endif;  
 ?>
-
 
 <html>
   <head>
